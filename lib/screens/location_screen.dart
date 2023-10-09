@@ -9,6 +9,7 @@ import 'package:weather_app/blocs/location/location_bloc.dart';
 import 'package:weather_app/blocs/weather/weather_bloc.dart';
 import 'package:weather_app/screens/weather_screen.dart';
 import 'package:weather_app/widgets/custom_background.dart';
+import 'package:weather_app/widgets/custom_button.dart';
 import 'package:weather_app/widgets/custom_text_field.dart';
 
 class LocationScreen extends StatefulWidget {
@@ -105,66 +106,23 @@ class _LocationScreenState extends State<LocationScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            SizedBox(
-                              // width: MediaQuery.of(context).size.width * 0.3,
-                              child: TextButton(
-                                  onPressed: () {
-                                    // if (_formKey.currentState!.validate()) {
-                                    //   context.read<SignInBloc>().add(SignInRequired(
-                                    //       emailController.text, passwordController.text));
-                                    // }
-                                    context.read<LocationBloc>().add(
-                                        FetchLocation(textController.text));
-                                  },
-                                  style: TextButton.styleFrom(
-                                      elevation: 3.0,
-                                      backgroundColor:
-                                          Theme.of(context).colorScheme.primary,
-                                      foregroundColor: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(60))),
-                                  child: const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 25, vertical: 5),
-                                    child: Text(
-                                      'Search',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  )),
+                            CustomButton(
+                              onPressed: () {
+                                if (textController.text.isNotEmpty) {
+                                  context
+                                      .read<LocationBloc>()
+                                      .add(FetchLocation(textController.text));
+                                }
+                              },
+                              title: 'Search',
                             ),
-                            SizedBox(
-                              child: TextButton(
-                                  onPressed: () {
-                                    context
-                                        .read<LocationBloc>()
-                                        .add(GetCurrentLocation());
-                                  },
-                                  style: TextButton.styleFrom(
-                                      elevation: 3.0,
-                                      backgroundColor:
-                                          Theme.of(context).colorScheme.primary,
-                                      foregroundColor: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(60))),
-                                  child: const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 25, vertical: 5),
-                                    child: Text(
-                                      'Get current',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  )),
-                            )
+                            CustomButton(
+                                onPressed: () {
+                                  context
+                                      .read<LocationBloc>()
+                                      .add(GetCurrentLocation());
+                                },
+                                title: 'Get current')
                           ],
                         )
                       ],
