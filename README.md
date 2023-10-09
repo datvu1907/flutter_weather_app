@@ -1,15 +1,26 @@
-# weather_app
+# Flutter Weather app
+## Tech Stack
 
-A new Flutter project getting weather.
+**Client:** Dart, Flutter 
+
+**Version Flutter:** 3.13.6
+
+## Techniques
+
+* Bloc pattern and Bloc stage management
+
+* Get the current position using the geolocator.
+  
+* Get a location (lat or long) based on the city name and worldwide post code using GeoCode.
+* Get weather status using WeatherAPI(https://openweathermap.org/api)
+
+* Clean code
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a starting point for a Flutter application Android. Please use VScode or Android Studio and run on Android phone.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
