@@ -57,8 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   outline: Color(0xFF424242))),
           builder: EasyLoading.init(),
           routes: {
-            '/location': (context) => LocationScreen(),
-            '/weather': (context) => WeatherScreen(),
+            '/location': (context) => const LocationScreen(),
+            '/weather': (context) => const WeatherScreen(),
           },
           home: const LocationScreen()),
     );

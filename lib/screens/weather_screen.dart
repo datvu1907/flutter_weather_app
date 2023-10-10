@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/blocs/weather/weather_bloc.dart';
-import 'package:weather_app/models/location_model.dart';
 import 'package:weather_app/widgets/custom_background.dart';
 
 class WeatherScreen extends StatefulWidget {
@@ -64,11 +63,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '📍 ${state.weather.areaName}',
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.outline,
-                      fontWeight: FontWeight.w300),
+                Padding(
+                  padding: const EdgeInsets.only(top: 40.0),
+                  child: Text(
+                    '📍 ${state.weather.areaName}',
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.outline,
+                        fontWeight: FontWeight.w300),
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
