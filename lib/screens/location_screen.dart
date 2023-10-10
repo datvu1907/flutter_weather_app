@@ -35,13 +35,9 @@ class _LocationScreenState extends State<LocationScreen> {
           listener: (context, state) {
             if (state is LocationSuccess) {
               EasyLoading.dismiss();
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => WeatherScreen(
-                          location: state.location,
-                        )),
-              );
+              BlocProvider.of<WeatherBloc>(context)
+                  .add(FetchWeather(state.location));
+              Navigator.pushNamed(context, '/weather');
             } else if (state is LocationLoading) {
               EasyLoading.show();
             } else if (state is LocationError) {

@@ -6,8 +6,10 @@ import 'package:weather_app/models/location_model.dart';
 import 'package:weather_app/widgets/custom_background.dart';
 
 class WeatherScreen extends StatefulWidget {
-  final LocationModel location;
-  const WeatherScreen({super.key, required this.location});
+  // final LocationModel location;
+  const WeatherScreen({
+    super.key,
+  });
 
   @override
   State<WeatherScreen> createState() => _WeatherScreenState();
@@ -53,71 +55,67 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomBackground(
-        child: BlocProvider(
-      create: (context) => WeatherBloc()..add(FetchWeather(widget.location)),
-      child: BlocBuilder<WeatherBloc, WeatherState>(
-        builder: (context, state) {
-          if (state is WeatherSuccess) {
-            return SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '📍 ${state.weather.areaName}',
+    return CustomBackground(child: BlocBuilder<WeatherBloc, WeatherState>(
+      builder: (context, state) {
+        if (state is WeatherSuccess) {
+          return SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '📍 ${state.weather.areaName}',
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.outline,
+                      fontWeight: FontWeight.w300),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Good ${getTime()}',
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.outline,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
+                getWeatherIcon(state.weather.weatherConditionCode!),
+                Center(
+                  child: Text(
+                    '${state.weather.temperature!.celsius!.round()}°C',
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.outline,
-                        fontWeight: FontWeight.w300),
+                        fontSize: 55,
+                        fontWeight: FontWeight.w600),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Good ${getTime()}',
+                ),
+                Center(
+                  child: Text(
+                    state.weather.weatherMain!.toUpperCase(),
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.outline,
                         fontSize: 25,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.w500),
                   ),
-                  getWeatherIcon(state.weather.weatherConditionCode!),
-                  Center(
-                    child: Text(
-                      '${state.weather.temperature!.celsius!.round()}°C',
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.outline,
-                          fontSize: 55,
-                          fontWeight: FontWeight.w600),
-                    ),
+                ),
+                const SizedBox(height: 5),
+                Center(
+                  child: Text(
+                    DateFormat('EEEE dd •')
+                        .add_jm()
+                        .format(state.weather.date!),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.outline,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300),
                   ),
-                  Center(
-                    child: Text(
-                      state.weather.weatherMain!.toUpperCase(),
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.outline,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Center(
-                    child: Text(
-                      DateFormat('EEEE dd •')
-                          .add_jm()
-                          .format(state.weather.date!),
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.outline,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          } else {
-            return Container();
-          }
-        },
-      ),
+                ),
+              ],
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
     ));
   }
 }
